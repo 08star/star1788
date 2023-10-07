@@ -8,16 +8,23 @@
         /* ... 你的 CSS 样式 ... */
     
         .floating-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #f00;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 50%;
-        }
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background-color: #f00;
+        color: #fff;
+        padding: 15px; /* 增大按钮的内边距 */
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 18px; /* 增大按钮的字体大小 */
+    }
+
+    /* 增大下拉菜单的宽度和字体大小 */
+    #itemConditions {
+        width: 200px; /* 增大下拉菜单的宽度 */
+        font-size: 16px; /* 增大下拉菜单的字体大小 */
+    }
 
         /* 待做清單的浮動框 */
         .addToOrder-details-popup {
@@ -122,13 +129,6 @@
     <div class="menu-item" onclick="addToOrder('辣腿捲')">辣腿捲</div>
 </div>
 <div class="category">
-    <h2>法國吐司</h2>
-    <div class="menu-item" onclick="addToOrder('果醬法吐')">果醬法吐</div>
-    <div class="menu-item" onclick="addToOrder('培根法吐')">培根法吐</div>
-    <div class="menu-item" onclick="addToOrder('鮪魚法吐')">鮪魚法吐</div>
-    <div class="menu-item" onclick="addToOrder('烤肉法吐')">烤肉法吐</div>
-</div>
-<div class="category">
     <h2>炸物</h2>
     <div class="menu-item" onclick="addToOrder('全熟蛋')">全熟蛋</div>
     <div class="menu-item" onclick="addToOrder('半熟蛋')">半熟蛋</div>
@@ -136,6 +136,13 @@
     <div class="menu-item" onclick="addToOrder('薯餅')">薯餅</div>
     <div class="menu-item" onclick="addToOrder('蘿蔔糕')">蘿蔔糕</div>
     <div class="menu-item" onclick="addToOrder('鐵板麵')">鐵板麵</div>
+</div>
+<div class="category">
+    <h2>法國吐司</h2>
+    <div class="menu-item" onclick="addToOrder('果醬法吐')">果醬法吐</div>
+    <div class="menu-item" onclick="addToOrder('培根法吐')">培根法吐</div>
+    <div class="menu-item" onclick="addToOrder('鮪魚法吐')">鮪魚法吐</div>
+    <div class="menu-item" onclick="addToOrder('烤肉法吐')">烤肉法吐</div>
 </div>
 <div class="category">
     <h2>日式穀堡</h2>
@@ -210,4 +217,6 @@
     
 </body>
 </html>
+
+
 
