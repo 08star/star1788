@@ -5,21 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>記餐系統</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+        /* ... 你的 CSS 样式 ... */
+    
+        .floating-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #f00;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
         }
 
-        h1 {
-            color: #333;
+        /* 待做清單的浮動框 */
+        .addToOrder-details-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
+        /* 水平排列菜單項目 */
         .category {
             margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
         }
 
         .menu-item {
-            display: inline-block;
             margin: 10px;
             padding: 10px;
             border: 1px solid #333;
@@ -30,74 +50,142 @@
         .menu-item:hover {
             background-color: #ddd;
         }
-
-        .order-details {
-            text-align: left;
-            display: none;
-        }
-
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #333;
-            background-color: #f5f5f5;
-            margin: 5px 0;
-            padding: 5px;
-        }
-
-        .reset-button {
-            background-color: #f00;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .reset-button:hover {
-            background-color: #ff5555;
-        }
     </style>
 </head>
+
 <body>
-    <h1>動態點餐系統</h1>
+    <h1>記餐系統</h1>
 
-    <!-- 分類 -->
-    <div class="category">
-        <h2>早餐</h2>
-        <div class="menu-item" onclick="order('漢堡')">漢堡</div>
-        <div class="menu-item" onclick="order('煎蛋三明治')">煎蛋三明治</div>
-    </div>
+<!-- 分類 -->
+<div class="category">
+    <h2>吐司</h2>
+    <div class="menu-item" onclick="addToOrder('假吐')">假吐</div>
+    <div class="menu-item" onclick="addToOrder('烤吐')">烤吐</div>
+    <div class="menu-item" onclick="addToOrder('起吐')">起吐</div>
+    <div class="menu-item" onclick="addToOrder('鮪吐')">鮪吐</div>
+    <div class="menu-item" onclick="addToOrder('火吐')">火吐</div>
+    <div class="menu-item" onclick="addToOrder('培吐')">培吐</div>
+    <div class="menu-item" onclick="addToOrder('培吐')">培吐</div>
+    <div class="menu-item" onclick="addToOrder('香雞吐')">香雞吐</div>
+    <div class="menu-item" onclick="addToOrder('總吐')">總吐</div>
+</div>
 
-    <div class="category">
-        <h2>午餐</h2>
-        <div class="menu-item" onclick="order('麥片')">麥片</div>
-    </div>
+<div class="category">
+    <h2>漢堡</h2>
+    <div class="menu-item" onclick="addToOrder('總堡')">總堡</div>
+    <div class="menu-item" onclick="addToOrder('烤堡')">烤堡</div>
+    <div class="menu-item" onclick="addToOrder('牛堡')">牛堡</div>
+    <div class="menu-item" onclick="addToOrder('豬堡')">豬堡</div>
+    <div class="menu-item" onclick="addToOrder('玉堡')">玉堡</div>
+    <div class="menu-item" onclick="addToOrder('辣腿堡')">辣腿堡</div>
+    <div class="menu-item" onclick="addToOrder('原腿堡')">原腿堡</div>
+    <div class="menu-item" onclick="addToOrder('香雞堡')">香雞堡</div>
+    <div class="menu-item" onclick="addToOrder('日雞堡')">日雞</div>
+    <div class="menu-item" onclick="addToOrder('日豬堡')">日豬堡</div>
+    <div class="menu-item" onclick="addToOrder('花枝堡')">花枝堡</div>
+    <div class="menu-item" onclick="addToOrder('蝦排堡')">蝦排堡</div>
+    <div class="menu-item" onclick="addToOrder('肉鬆堡')">肉鬆堡</div>
+    
+</div>
+
+<div class="category">
+    <h2>蛋餅</h2>
+    <div class="menu-item" onclick="addToOrder('原P')">原P</div>
+    <div class="menu-item" onclick="addToOrder('烤P')">烤P</div>
+    <div class="menu-item" onclick="addToOrder('起P')">起P</div>
+    <div class="menu-item" onclick="addToOrder('火P')">火P</div>
+    <div class="menu-item" onclick="addToOrder('鮪P')">鮪P</div>
+    <div class="menu-item" onclick="addToOrder('培P')">培P</div>
+    <div class="menu-item" onclick="addToOrder('狗P')">狗P</div>
+    <div class="menu-item" onclick="addToOrder('玉P')">玉P</div>
+    <div class="menu-item" onclick="addToOrder('菜P')">菜P</div>
+    <div class="menu-item" onclick="addToOrder('洋P')">洋P</div>
+    <div class="menu-item" onclick="addToOrder('肉鬆P')">肉鬆P</div>
+</div>
+<div class="category">
+    <h2>麵類</h2>
+    <div class="menu-item" onclick="addToOrder('炒麵')">炒麵</div>
+    <div class="menu-item" onclick="addToOrder('烤肉炒麵')">烤肉炒麵</div>
+    <div class="menu-item" onclick="addToOrder('日雞炒麵')">日雞炒麵</div>
+    <div class="menu-item" onclick="addToOrder('日豬炒麵')">日豬炒麵</div>
+    <div class="menu-item" onclick="addToOrder('培根炒麵')">培根炒麵</div>
+    <div class="menu-item" onclick="addToOrder('火腿炒麵')">火腿炒麵</div>
+</div>
+<div class="category">
+    <h2>捲餅</h2>
+    <div class="menu-item" onclick="addToOrder('香雞捲')">香雞捲</div>
+    <div class="menu-item" onclick="addToOrder('烤肉捲')">烤肉捲</div>
+    <div class="menu-item" onclick="addToOrder('日雞捲')">日雞捲</div>
+    <div class="menu-item" onclick="addToOrder('花枝捲')">花枝捲</div>
+    <div class="menu-item" onclick="addToOrder('蝦排捲')">蝦排捲</div>
+    <div class="menu-item" onclick="addToOrder('原腿捲')">原腿捲</div>
+    <div class="menu-item" onclick="addToOrder('辣腿捲')">辣腿捲</div>
+</div>
+<div class="category">
+    <h2>法國吐司</h2>
+    <div class="menu-item" onclick="addToOrder('果醬法吐')">果醬法吐</div>
+    <div class="menu-item" onclick="addToOrder('培根法吐')">培根法吐</div>
+    <div class="menu-item" onclick="addToOrder('鮪魚法吐')">鮪魚法吐</div>
+    <div class="menu-item" onclick="addToOrder('烤肉法吐')">烤肉法吐</div>
+</div>
+<div class="category">
+    <h2>炸物</h2>
+    <div class="menu-item" onclick="addToOrder('全熟蛋')">全熟蛋</div>
+    <div class="menu-item" onclick="addToOrder('半熟蛋')">半熟蛋</div>
+    <div class="menu-item" onclick="addToOrder('熱狗')">熱狗</div>
+    <div class="menu-item" onclick="addToOrder('薯餅')">薯餅</div>
+    <div class="menu-item" onclick="addToOrder('蘿蔔糕')">蘿蔔糕</div>
+    <div class="menu-item" onclick="addToOrder('鐵板麵')">鐵板麵</div>
+</div>
+<div class="category">
+    <h2>日式穀堡</h2>
+    <div class="menu-item" onclick="addToOrder('菜穀')">菜穀</div>
+    <div class="menu-item" onclick="addToOrder('雞穀')">雞穀</div>
+    <div class="menu-item" onclick="addToOrder('豬穀')">豬穀</div>
+    <div class="menu-item" onclick="addToOrder('咖哩穀')">咖哩穀</div>
+    <div class="menu-item" onclick="addToOrder('魚排穀')">魚排穀</div>
+</div>
+<div class="category">
+    <h2>起酥堡</h2>
+    <div class="menu-item" onclick="addToOrder('果醬法吐')">草莓起酥</div>
+    <div class="menu-item" onclick="addToOrder('洋芋起酥')">洋芋起酥</div>
+    <div class="menu-item" onclick="addToOrder('苜蓿芽玉米起酥')">苜蓿芽玉米起酥</div>
+    <div class="menu-item" onclick="addToOrder('番茄萵苣起酥')">番茄萵苣起酥</div>
+    <div class="menu-item" onclick="addToOrder('萵苣烤肉起酥')">萵苣烤肉起酥</div>
+</div>
+
+
+
+<!-- 右上角的浮動按鈕 -->
+<button class="floating-button" onclick="toggleOrderList()">待做</button>
 
     <!-- 選擇條件的下拉選單 -->
     <div>
         <select id="itemConditions">
             <option value="正常">正常</option>
+            <option value="正常">全P</option>
+            <option value="正常">特殊</option>
             <option value="不醬">不醬</option>
+            <option value="不菜">不菜</option>
             <option value="不番改千">不番改千</option>
             <!-- 可以添加更多的條件選項 -->
         </select>
     </div>
 
+
     <!-- 待做清單 -->
-    <div class="order-details">
+    <div class="addToOrder-details-popup" id="orderDetailsPopup">
         <h2>待做清單</h2>
         <ul id="orderDetails">
             <!-- 這裡將顯示最終的訂單詳情 -->
         </ul>
-        <button class="reset-button" onclick="resetOrderList()">重製清單</button>
     </div>
 
     <script>
-        const orderDetails = document.querySelector('.order-details');
+        const orderDetailsPopup = document.querySelector('#orderDetailsPopup');
         const orderList = document.querySelector('#orderDetails');
 
-        function order(itemName) {
+        function addToOrder(itemName) {
             const itemConditions = document.getElementById('itemConditions').value;
 
             if (itemConditions === '請選擇條件') {
@@ -108,7 +196,6 @@
             const orderItem = document.createElement('li');
             orderItem.innerHTML = `${itemName} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
             orderList.appendChild(orderItem);
-            orderDetails.style.display = 'block';
         }
 
         function complete(button) {
@@ -116,11 +203,11 @@
             orderList.removeChild(orderItem);
         }
 
-        function resetOrderList() {
-            orderList.innerHTML = ''; // 清空待做清單
-            orderDetails.style.display = 'none'; // 隱藏清單
+        function toggleOrderList() {
+            orderDetailsPopup.style.display = orderDetailsPopup.style.display === 'none' ? 'block' : 'none';
         }
     </script>
+    
 </body>
 </html>
 
