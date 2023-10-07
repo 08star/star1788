@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動態點餐系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .category {
+            margin: 20px;
+        }
+
+        .menu-item {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #333;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: #ddd;
+        }
+
+        .order-details {
+            text-align: left;
+            display: none;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+            background-color: #f5f5f5;
+            margin: 5px 0;
+            padding: 5px;
+        }
+
+        .reset-button {
+            background-color: #f00;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .reset-button:hover {
+            background-color: #ff5555;
+        }
+    </style>
+</head>
+<body>
+    <h1>動態點餐系統</h1>
+
+    <!-- 分類 -->
+    <div class="category">
+        <h2>早餐</h2>
+        <div class="menu-item" onclick="order('漢堡')">漢堡</div>
+        <div class="menu-item" onclick="order('煎蛋三明治')">煎蛋三明治</div>
+    </div>
+
+    <div class="category">
+        <h2>午餐</h2>
+        <div class="menu-item" onclick="order('麥片')">麥片</div>
+    </div>
+
+    <!-- 選擇條件的下拉選單 -->
+    <div>
+        <select id="itemConditions">
+            <option value="正常">正常</option>
+            <option value="不醬">不醬</option>
+            <option value="不番改千">不番改千</option>
+            <!-- 可以添加更多的條件選項 -->
+        </select>
+    </div>
+
+    <!-- 待做清單 -->
+    <div class="order-details">
+        <h2>待做清單</h2>
+        <ul id="orderDetails">
+            <!-- 這裡將顯示最終的訂單詳情 -->
+        </ul>
+        <button class="reset-button" onclick="resetOrderList()">重製清單</button>
+    </div>
+
+    <script>
+        const orderDetails = document.querySelector('.order-details');
+        const orderList = document.querySelector('#orderDetails');
+
+        function order(itemName) {
+            const itemConditions = document.getElementById('itemConditions').value;
+
+            if (itemConditions === '請選擇條件') {
+                alert('請選擇條件');
+                return;
+            }
+
+            const orderItem = document.createElement('li');
+            orderItem.innerHTML = `${itemName} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
+            orderList.appendChild(orderItem);
+            orderDetails.style.display = 'block';
+        }
+
+        function complete(button) {
+            const orderItem = button.parentElement;
+            orderList.removeChild(orderItem);
+        }
+
+        function resetOrderList() {
+            orderList.innerHTML = ''; // 清空待做清單
+            orderDetails.style.display = 'none'; // 隱藏清單
+        }
+    </script>
+</body>
+</html>
