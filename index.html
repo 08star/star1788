@@ -3,286 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>記餐系统</title>
+    <title>記餐系統登入</title>
     <style>
-        /* ... 你的 CSS 样式 ... */
-    
-        .floating-button {
-            position: fixed;
-            top: 10px;
-            right: 20px;
-            background-color: #f00;
+        /* 样式可以根据你的需求进行自定义 */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #16c27a;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .login-button {
+            background-color: #007bff;
             color: #fff;
-            padding: 25px;
             border: none;
+            padding: 10px 20px;
             cursor: pointer;
-            border-radius: 80%;
-        }
-
-        .category {
-            margin: 60px;
-            display: none; /* 初始隐藏所有分类 */
-            flex-wrap: wrap;
-        }
-
-        .menu-item {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #333;
-            background-color: #f5f5f5;
-            cursor: pointer;
-        }
-
-        .menu-item:hover {
-            background-color: #ddd;
-        }
-
-        /* 导航栏样式 */
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            padding: 5px 10px;
-        }
-
-        /* 模态框样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 10px;
-            box-shadow: 0px 50px 10px rgba(0, 0, 10, 0.5);
-            z-index: 1000;
-            overflow: hidden;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .floating-button {
-            font-size: 15px; /* 调整字体大小为20px，根据需要修改 */
-    /* 其他样式 */
         }
     </style>
 </head>
-
 <body>
-    <h1>記餐系统</h1>
-
-    <!-- 导航栏 -->
-    <div class="navbar">
-        <a href="#" onclick="showCategory('吐司')">吐司</a>
-        <a href="#" onclick="showCategory('漢堡')">漢堡</a>
-        <a href="#" onclick="showCategory('蛋餅')">蛋餅</a>
-        <a href="#" onclick="showCategory('麵類')">麵類</a>
-        <a href="#" onclick="showCategory('捲餅')">捲餅</a>
-        <a href="#" onclick="showCategory('炸物')">炸物</a>
-        <a href="#" onclick="showCategory('法國吐司')">法國吐司</a>
-        <a href="#" onclick="showCategory('日式穀堡')">日式穀堡</a>
-        <a href="#" onclick="showCategory('起酥堡')">起酥堡</a>
-        <!-- 在这里添加更多分类的链接 -->
-    </div>
-
-    <!-- 吐司分类 -->
-    <div class="category" id="吐司">
-        <div class="menu-item" onclick="showOptions('假吐')">假吐</div>
-        <div class="menu-item" onclick="showOptions('烤吐')">烤吐</div>
-        <div class="menu-item" onclick="showOptions('起吐')">起吐</div>
-        <div class="menu-item" onclick="showOptions('鮪吐')">鮪吐</div>
-        <div class="menu-item" onclick="showOptions('火吐')">火吐</div>
-        <div class="menu-item" onclick="showOptions('培吐')">培吐</div>
-        <div class="menu-item" onclick="showOptions('培吐')">培吐</div>
-        <div class="menu-item" onclick="showOptions('香雞吐')">香雞吐</div>
-        <div class="menu-item" onclick="showOptions('總吐')">總吐</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="漢堡">
-        <div class="menu-item" onclick="showOptions('總堡')">總堡</div>
-    <div class="menu-item" onclick="showOptions('烤堡')">烤堡</div>
-    <div class="menu-item" onclick="showOptions('牛堡')">牛堡</div>
-    <div class="menu-item" onclick="showOptions('豬堡')">豬堡</div>
-    <div class="menu-item" onclick="showOptions('玉堡')">玉堡</div>
-    <div class="menu-item" onclick="showOptions('辣腿堡')">辣腿堡</div>
-    <div class="menu-item" onclick="showOptions('原腿堡')">原腿堡</div>
-    <div class="menu-item" onclick="showOptions('香雞堡')">香雞堡</div>
-    <div class="menu-item" onclick="showOptions('日雞堡')">日雞</div>
-    <div class="menu-item" onclick="showOptions('日豬堡')">日豬堡</div>
-    <div class="menu-item" onclick="showOptions('花枝堡')">花枝堡</div>
-    <div class="menu-item" onclick="showOptions('蝦排堡')">蝦排堡</div>
-    <div class="menu-item" onclick="showOptions('肉鬆堡')">肉鬆堡</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="蛋餅">
-        <div class="menu-item" onclick="showOptions('原P')">原味</div>
-    <div class="menu-item" onclick="showOptions('烤P')">烤肉</div>
-    <div class="menu-item" onclick="showOptions('起P')">起司</div>
-    <div class="menu-item" onclick="showOptions('火P')">火腿</div>
-    <div class="menu-item" onclick="showOptions('鮪P')">鮪魚</div>
-    <div class="menu-item" onclick="showOptions('培P')">培根</div>
-    <div class="menu-item" onclick="showOptions('狗P')">熱狗</div>
-    <div class="menu-item" onclick="showOptions('玉P')">玉米</div>
-    <div class="menu-item" onclick="showOptions('菜P')">萵苣</div>
-    <div class="menu-item" onclick="showOptions('洋P')">洋蔥</div>
-    <div class="menu-item" onclick="showOptions('肉鬆P')">肉鬆</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="麵類">
-        <div class="menu-item" onclick="showOptions('炒麵')">炒麵</div>
-    <div class="menu-item" onclick="showOptions('烤肉炒麵')">烤肉炒麵</div>
-    <div class="menu-item" onclick="showOptions('日雞炒麵')">日雞炒麵</div>
-    <div class="menu-item" onclick="showOptions('日豬炒麵')">日豬炒麵</div>
-    <div class="menu-item" onclick="showOptions('培根炒麵')">培根炒麵</div>
-    <div class="menu-item" onclick="showOptions('火腿炒麵')">火腿炒麵</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="捲餅">
-        <div class="menu-item" onclick="showOptions('香雞捲')">香雞捲</div>
-    <div class="menu-item" onclick="showOptions('烤肉捲')">烤肉捲</div>
-    <div class="menu-item" onclick="showOptions('日雞捲')">日雞捲</div>
-    <div class="menu-item" onclick="showOptions('花枝捲')">花枝捲</div>
-    <div class="menu-item" onclick="showOptions('蝦排捲')">蝦排捲</div>
-    <div class="menu-item" onclick="showOptions('原腿捲')">原腿捲</div>
-    <div class="menu-item" onclick="showOptions('辣腿捲')">辣腿捲</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="炸物">
-        <div class="menu-item" onclick="showOptions('全熟蛋')">全熟蛋</div>
-    <div class="menu-item" onclick="showOptions('半熟蛋')">半熟蛋</div>
-    <div class="menu-item" onclick="showOptions('熱狗')">熱狗</div>
-    <div class="menu-item" onclick="showOptions('薯餅')">薯餅</div>
-    <div class="menu-item" onclick="showOptions('蘿蔔糕')">蘿蔔糕</div>
-    <div class="menu-item" onclick="showOptions('鐵板麵')">鐵板麵</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="法國吐司">
-        <div class="menu-item" onclick="showOptions('果醬法吐')">果醬法吐</div>
-    <div class="menu-item" onclick="showOptions('培根法吐')">培根法吐</div>
-    <div class="menu-item" onclick="showOptions('鮪魚法吐')">鮪魚法吐</div>
-    <div class="menu-item" onclick="showOptions('烤肉法吐')">烤肉法吐</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="日式穀堡">
-        <div class="menu-item" onclick="showOptions('菜穀')">菜穀</div>
-    <div class="menu-item" onclick="showOptions('雞穀')">雞穀</div>
-    <div class="menu-item" onclick="showOptions('豬穀')">豬穀</div>
-    <div class="menu-item" onclick="showOptions('咖哩穀')">咖哩穀</div>
-    <div class="menu-item" onclick="showOptions('魚排穀')">魚排穀</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-    <div class="category" id="起酥堡">
-        <div class="menu-item" onclick="showOptions('果醬法吐')">草莓起酥</div>
-    <div class="menu-item" onclick="showOptions('洋芋起酥')">洋芋起酥</div>
-    <div class="menu-item" onclick="showOptions('苜蓿芽玉米起酥')">苜蓿芽玉米起酥</div>
-    <div class="menu-item" onclick="showOptions('番茄萵苣起酥')">番茄萵苣起酥</div>
-    <div class="menu-item" onclick="showOptions('萵苣烤肉起酥')">萵苣烤肉起酥</div>
-        
-        <!-- 在这里添加更多吐司的菜单项 -->
-    </div>
-
-<!-- 在这里添加其他菜单分类的HTML代码 -->
-
-    <!-- 显示选项的模态框 -->
-    <div class="modal" id="optionsPopup">
-        <h2>選擇選項</h2>
-        <button onclick="addToOrder('正常')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">正常</button>
-        <button onclick="addToOrder('全')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">全</button>
-        <button onclick="addToOrder('特殊')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">特殊</button>
-        <button onclick="addToOrder('不醬')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">不醬</button>
-        <button onclick="addToOrder('番改千')" style="width: 80px;height: 36;height: 31px;font-size: 20px;">番改千</button>
-        <!-- 在这里添加更多选项按钮 -->
-        <button onclick="closeOptions()" style="width: 100px;height: 36;height: 31px;font-size: 20px;">關閉視窗</button>
-    </div>
-
-    <!-- 右上角的浮动按钮 -->
-    <button class="floating-button" onclick="toggleOrderList()" style="font-size: 19px;">待做清單</button>
-
-
-    <!-- 待做清单模态框 -->
-    <div class="modal" id="orderDetailsPopup">
-        <h2>待做清单</h2>
-        <ul id="orderDetails">
-            <!-- 这里将显示最终的订单详情 -->
-        </ul>
-        <button onclick="closeOrderDetails()">關閉</button>
+    <div class="login-container">
+        <h2>登入</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密碼：</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button">登录</button>
+        </form>
     </div>
 
     <script>
-        const optionsPopup = document.querySelector('#optionsPopup');
-        const orderDetailsPopup = document.querySelector('#orderDetailsPopup');
-        const orderList = document.querySelector('#orderDetails');
-        let selectedMenuItem = '';
+        // 在这里添加 JavaScript 代码来处理登录表单提交
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-        // 显示选项模态框
-        function showOptions(itemName) {
-            selectedMenuItem = itemName;
-            optionsPopup.style.display = 'block';
-        }
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-        // 添加到待做清单
-        function addToOrder(itemConditions) {
-            if (itemConditions === '请选择选项') {
-                alert('请选择选项');
-                return;
+            // 在这里发送登录请求到服务器，验证用户身份
+            // 你可以使用 Fetch API 或其他方式发送 POST 请求
+
+            // 假设验证成功后，将用户重定向到 index1.html
+            if (username === 'root' && password === 'aaaaaaaa') {
+                window.location.href = 'index1.html';
+            } else {
+                // 登录失败的处理
+                alert('登入失敗，請檢查使用者名稱和密碼。');
             }
-
-            const orderItem = document.createElement('li');
-            orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
-            orderList.appendChild(orderItem);
-
-            // 清空选项
-            optionsPopup.style.display = 'none';
-        }
-
-        // 关闭选项模态框
-        function closeOptions() {
-            optionsPopup.style.display = 'none';
-        }
-
-        // 完成订单
-        function complete(button) {
-            const orderItem = button.parentElement;
-            orderList.removeChild(orderItem);
-        }
-
-        // 切换待做清单的显示状态
-        function toggleOrderList() {
-            orderDetailsPopup.style.display = 'block';
-        }
-
-        // 关闭待做清单
-        function closeOrderDetails() {
-            orderDetailsPopup.style.display = 'none';
-        }
-
-        // 显示特定分类
-        function showCategory(categoryId) {
-            const categories = document.querySelectorAll('.category');
-            categories.forEach(category => {
-                if (category.id === categoryId) {
-                    category.style.display = 'flex';
-                } else {
-                    category.style.display = 'none';
-                }
-            });
-        }
+        });
     </script>
-
+</body>
+</html>
 </body>
 </html>
