@@ -63,6 +63,10 @@
             padding: 10px;
             box-shadow: 0px 50px 10px rgba(0, 0, 10, 0.5);
             z-index: 1000;
+            overflow: hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .floating-button {
             font-size: 15px; /* 调整字体大小为20px，根据需要修改 */
@@ -195,7 +199,7 @@
 <!-- 在这里添加其他菜单分类的HTML代码 -->
 
     <!-- 显示选项的模态框 -->
-    <div class="modal" id="optionsPopup" style="display: block;width: 300px;">
+    <div class="modal" id="optionsPopup">
         <h2>選擇選項</h2>
         <button onclick="addToOrder('正常')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">正常</button>
         <button onclick="addToOrder('全')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">全</button>
@@ -211,7 +215,7 @@
 
 
     <!-- 待做清单模态框 -->
-    <div class="modal" id="orderDetailsPopup" style="display: block;width: 300px;">
+    <div class="modal" id="orderDetailsPopup">
         <h2>待做清单</h2>
         <ul id="orderDetails">
             <!-- 这里将显示最终的订单详情 -->
