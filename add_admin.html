@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 省略其他头部信息 -->
+</head>
+<body>
+    <h2>新增管理员</h2>
+
+    <!-- 创建表单用于输入新管理员的用户名和密码 -->
+    <form id="add-admin-form">
+        <div class="form-group">
+            <label for="new-username">新管理员用户名：</label>
+            <input type="text" id="new-username" name="new-username" required>
+        </div>
+        <div class="form-group">
+            <label for="new-password">新管理员密码：</label>
+            <input type="password" id="new-password" name="new-password" required>
+        </div>
+        <button type="submit">添加管理员</button>
+    </form>
+
+    <script>
+        // 在这里添加 JavaScript 代码来处理添加管理员表单的提交
+        document.getElementById('add-admin-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // 获取新管理员的用户名和密码
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+
+            // 在这里执行添加管理员的逻辑
+            // 请根据您的需求实现相应的操作，例如将新管理员信息保存到数据库中
+
+            // 添加成功后，将用户重定向到 index1.html 或其他页面
+            window.location.href = 'index1.html';
+        });
+    </script>
+</body>
+</html>
