@@ -75,7 +75,24 @@
         }
     </style>
 </head>
+<script src="/socket.io/socket.io.js"></script>
 
+<script>
+    // 连接到WebSocket服务器
+    const socket = io();
+
+    // 监听服务器发送的更新消息
+    socket.on('update', (data) => {
+        // 在这里更新待做清单，例如在页面上显示点餐信息
+        console.log('Received update:', data);
+    });
+
+    // 当用户点餐时，发送消息到服务器
+    document.getElementById('order-button').addEventListener('click', () => {
+        const orderData = { /* 这里放置点餐信息 */ };
+        socket.emit('order', orderData);
+    });
+</script>
 
 <body>
     <h1>記餐系统</h1>
@@ -322,3 +339,4 @@
 
 </body>
 </html>
+
