@@ -356,18 +356,25 @@ function restoreOrdersFromLocalStorage() {
     const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
 
     savedOrders.forEach(order => {
-        // 使用订单的唯一 ID 进行标识
         const orderId = Date.now();
         
         const orderItem = document.createElement('li');
-        orderItem.innerHTML = `${order.menuItem} - ${order.itemConditions} <button class="complete-button" data-order-id="${orderId}" onclick="complete(${orderId})">完成</button>`;
+        orderItem.innerHTML = `${order.menuItem} - ${order.itemConditions} <button class="complete-button" data-order-id="${orderId}">完成</button>`;
         
-        // 检查是否已经存在相同订单，如果不存在才添加
         if (!orderList.querySelector(`[data-order-id="${orderId}"]`)) {
             orderList.appendChild(orderItem);
         }
     });
+
+    // 重新绑定 "完成" 按钮的点击事件
+    const completeButtons = document.querySelectorAll('.complete-button');
+    completeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            complete(button);
+        });
+    });
 }
+
 
 // 调用函数以在页面加载时恢复餐点
 restoreOrdersFromLocalStorage();
