@@ -10,7 +10,7 @@
     
         .floating-button {
             position: fixed;
-            top: 10px;
+            top: 290px;
             right: 20px;
             background-color: #f00;
             color: #fff;
@@ -21,7 +21,7 @@
         }
 
         .category {
-            margin: 60px;
+            margin: 30px;
             display: none; /* 初始隐藏所有分类 */
             flex-wrap: wrap;
         }
@@ -57,10 +57,10 @@
         .modal {
             display: none;
             position: fixed;
-            top: 20%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #fff;
+            background-color: #ece06c;
             padding: 10px;
             box-shadow: 0px 50px 10px rgba(0, 0, 10, 0.5);
             z-index: 1000;
@@ -72,7 +72,24 @@
         .floating-button {
             font-size: 15px; /* 调整字体大小为20px，根据需要修改 */
     /* 其他样式 */
+
         }
+        
+        /* 将选项按钮放成两列 */
+#optionsPopup button {
+    width: 60px;
+    height: 36px;
+    font-size: 20px;
+    margin: 5px; /* 添加间距 */
+    float: left; /* 左浮动，使其并排显示 */
+}
+
+/* 清除浮动以避免影响其他元素 */
+#optionsPopup::after {
+    content: '';
+    display: table;
+    clear: both;
+}
     </style>
 </head>
 <script src="/socket.io/socket.io.js"></script>
@@ -97,6 +114,8 @@
 <body>
     <h1>記餐系统</h1>
     <!-- 在index1.html中的合适位置添加登出按钮 -->
+    
+
     <button id="logout-button">登出</button>
 
     <!-- 添加按钮用于添加管理员 -->
@@ -139,9 +158,9 @@
         <a href="#" onclick="showCategory('麵類')">麵類</a>
         <a href="#" onclick="showCategory('捲餅')">捲餅</a>
         <a href="#" onclick="showCategory('炸物')">炸物</a>
-        <a href="#" onclick="showCategory('法國吐司')">法國吐司</a>
-        <a href="#" onclick="showCategory('日式穀堡')">日式穀堡</a>
-        <a href="#" onclick="showCategory('起酥堡')">起酥堡</a>
+        <a href="#" onclick="showCategory('法國吐司')">法吐</a>
+        <a href="#" onclick="showCategory('日式穀堡')">穀堡</a>
+        <a href="#" onclick="showCategory('起酥堡')">起酥</a>
         <!-- 在这里添加更多分类的链接 -->
     </div>
 
@@ -177,17 +196,17 @@
         <!-- 在这里添加更多吐司的菜单项 -->
     </div>
     <div class="category" id="蛋餅">
-        <div class="menu-item" onclick="showOptions('原P')">原味</div>
-    <div class="menu-item" onclick="showOptions('烤P')">烤肉</div>
-    <div class="menu-item" onclick="showOptions('起P')">起司</div>
-    <div class="menu-item" onclick="showOptions('火P')">火腿</div>
-    <div class="menu-item" onclick="showOptions('鮪P')">鮪魚</div>
-    <div class="menu-item" onclick="showOptions('培P')">培根</div>
-    <div class="menu-item" onclick="showOptions('狗P')">熱狗</div>
-    <div class="menu-item" onclick="showOptions('玉P')">玉米</div>
-    <div class="menu-item" onclick="showOptions('菜P')">萵苣</div>
-    <div class="menu-item" onclick="showOptions('洋P')">洋蔥</div>
-    <div class="menu-item" onclick="showOptions('肉鬆P')">肉鬆</div>
+        <div class="menu-item" onclick="showOptions('原味')">原味</div>
+    <div class="menu-item" onclick="showOptions('烤肉')">烤肉</div>
+    <div class="menu-item" onclick="showOptions('起司')">起司</div>
+    <div class="menu-item" onclick="showOptions('火腿')">火腿</div>
+    <div class="menu-item" onclick="showOptions('鮪魚')">鮪魚</div>
+    <div class="menu-item" onclick="showOptions('培根')">培根</div>
+    <div class="menu-item" onclick="showOptions('熱狗')">熱狗</div>
+    <div class="menu-item" onclick="showOptions('玉米')">玉米</div>
+    <div class="menu-item" onclick="showOptions('萵苣')">萵苣</div>
+    <div class="menu-item" onclick="showOptions('洋蔥')">洋蔥</div>
+    <div class="menu-item" onclick="showOptions('肉鬆')">肉鬆</div>
         
         <!-- 在这里添加更多吐司的菜单项 -->
     </div>
@@ -254,7 +273,7 @@
     <!-- 显示选项的模态框 -->
     <div class="modal" id="optionsPopup">
         <h2>選擇選項</h2>
-        <button onclick="addToOrder('正常')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">正常</button>
+        <button onclick="addToOrder('正常')" style="width: 80px;height: 36;height: 31px;font-size: 20px;">正常</button>
         <button onclick="addToOrder('全')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">全</button>
         <button onclick="addToOrder('特殊')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">特殊</button>
         <button onclick="addToOrder('不醬')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">不醬</button>
@@ -269,12 +288,13 @@
 
     <!-- 待做清单模态框 -->
     <div class="modal" id="orderDetailsPopup">
-        <h2>待做清单</h2>
+        <h2>待做清單</h2>
         <ul id="orderDetails">
             <!-- 这里将显示最终的订单详情 -->
         </ul>
         <button onclick="closeOrderDetails()">關閉</button>
     </div>
+    <div id="messageDiv"></div>
 
     <script>
         const optionsPopup = document.querySelector('#optionsPopup');
@@ -289,24 +309,32 @@
         }
 
         // 添加到待做清单
-        function addToOrder(itemConditions) {
-            if (itemConditions === '请选择选项') {
-                alert('请选择选项');
-                return;
-            }
+function addToOrder(itemConditions) {
+    if (itemConditions === '请选择选项') {
+        alert('请选择选项');
+        return;
+    }
 
-            const orderItem = document.createElement('li');
-            orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
-            orderList.appendChild(orderItem);
+    const orderItem = document.createElement('li');
+    orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
+    orderList.appendChild(orderItem);
 
-            // 清空选项
-            optionsPopup.style.display = 'none';
-        }
+    // 清空选项
+    optionsPopup.style.display = 'none';
 
-        // 关闭选项模态框
-        function closeOptions() {
-            optionsPopup.style.display = 'none';
-        }
+    // 显示成功消息，传递所选的餐品名称
+    showMessage(`${selectedMenuItem} 已點餐完成`);
+}
+
+function showMessage(message) {
+    const messageDiv = document.getElementById('messageDiv');
+    messageDiv.textContent = message;
+
+    // 清空消息，你可以设置一个定时器来自动清除消息
+    setTimeout(() => {
+        messageDiv.textContent = '';
+    }, 3000); // 在3秒后清空消息
+}
 
         // 完成订单
         function complete(button) {
@@ -335,8 +363,11 @@
                 }
             });
         }
+        function closeOptions() {
+    const optionsPopup = document.querySelector('#optionsPopup');
+    optionsPopup.style.display = 'none';
+}
     </script>
 
 </body>
 </html>
-
