@@ -299,7 +299,6 @@
         }
 
         // 添加到待做清单
-        // 添加到待做清单
 function addToOrder(itemConditions) {
     if (itemConditions === '请选择选项') {
         alert('请选择选项');
@@ -307,12 +306,8 @@ function addToOrder(itemConditions) {
     }
 
     const orderItem = document.createElement('li');
-    const orderId = Date.now(); // 为每个订单生成唯一的ID
     orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
     orderList.appendChild(orderItem);
-
-    // 保存所选的餐品到本地存储
-    saveOrderToLocalStorage(selectedMenuItem, itemConditions, orderId);
 
     // 清空选项
     optionsPopup.style.display = 'none';
@@ -320,64 +315,6 @@ function addToOrder(itemConditions) {
     // 显示成功消息，传递所选的餐品名称
     showMessage(`${selectedMenuItem} 已點餐完成`);
 }
-
-// 完成订单
-function complete(button) {
-    const orderItem = button.parentElement;
-    orderList.removeChild(orderItem);
-
-    // 从本地存储中删除对应的餐点
-    const orderId = button.parentElement.getAttribute('data-order-id');
-    removeOrderFromLocalStorage(orderId);
-}
-
-function removeOrderFromLocalStorage(orderId) {
-    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-
-    // 找到并删除具有匹配 orderId 的订单
-    const updatedOrders = savedOrders.filter(order => order.orderId !== orderId);
-
-    // 更新本地存储
-    localStorage.setItem('orders', JSON.stringify(updatedOrders));
-}
-function saveOrderToLocalStorage(menuItem, itemConditions) {
-    // 从本地存储中获取之前保存的餐点
-    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-
-    // 添加当前的餐点到数组中
-    savedOrders.push({ menuItem, itemConditions });
-
-    // 将更新后的餐点重新保存到本地存储
-    localStorage.setItem('orders', JSON.stringify(savedOrders));
-}
-
-// 在页面加载时检查本地存储并恢复之前保存的餐点
-function restoreOrdersFromLocalStorage() {
-    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-
-    savedOrders.forEach(order => {
-        const orderId = Date.now();
-        
-        const orderItem = document.createElement('li');
-        orderItem.innerHTML = `${order.menuItem} - ${order.itemConditions} <button class="complete-button" data-order-id="${orderId}">完成</button>`;
-        
-        if (!orderList.querySelector(`[data-order-id="${orderId}"]`)) {
-            orderList.appendChild(orderItem);
-        }
-    });
-
-    // 重新绑定 "完成" 按钮的点击事件
-    const completeButtons = document.querySelectorAll('.complete-button');
-    completeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            complete(button);
-        });
-    });
-}
-
-
-// 调用函数以在页面加载时恢复餐点
-restoreOrdersFromLocalStorage();
 
 function showMessage(message) {
     const messageDiv = document.getElementById('messageDiv');
