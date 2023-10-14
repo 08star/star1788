@@ -114,17 +114,16 @@
 <body>
     <h1>記餐系统</h1>
     <!-- 在index1.html中的合适位置添加登出按钮 -->
-    
-
     <button id="logout-button">登出</button>
 
     <!-- 添加按钮用于添加管理员 -->
-    <button id="add-admin-button">新增管理员</button>
+    <button id="star08">食材數量紀錄</button>
 
+    <!-- JavaScript 代码 -->
     <script>
         // 获取登出按钮元素
         const logoutButton = document.getElementById('logout-button');
-        const addAdminButton = document.getElementById('add-admin-button');
+        const star08Button = document.getElementById('star08');
 
         // 监听登出按钮的点击事件
         logoutButton.addEventListener('click', function () {
@@ -134,19 +133,10 @@
             window.location.href = 'index.html';
         });
 
-        // 监听新增管理员按钮的点击事件
-        addAdminButton.addEventListener('click', function () {
-            // 在这里检查当前用户是否为 root 帐户
-            // 如果是 root 帐户，将用户重定向到 add_admin.html 页面
-            // 否则，显示权限不足的提示
-            // 请根据您的逻辑进行相应的处理
-            const isRootUser = true; // 假设当前用户是 root 帐户，您需要替换为实际的逻辑
-
-            if (isRootUser) {
-                window.location.href = 'add_admin.html';
-            } else {
-                alert('权限不足，只有 root 帐户可以执行此操作。');
-            }
+        // 监听今日開項目紀錄按钮的点击事件
+        star08Button.addEventListener('click', function () {
+            // 在按钮点击时，将用户重定向到 star08.html 页面
+            window.location.href = 'star08.html';
         });
     </script>
 
@@ -294,7 +284,7 @@
         </ul>
         <button onclick="closeOrderDetails()">關閉</button>
     </div>
-    <div id="messageDiv" style = "padding-bottom: 250px;"></div>
+    <div id="messageDiv" style = "padding-bottom: 300px;"></div>
 
     <script>
         const optionsPopup = document.querySelector('#optionsPopup');
@@ -309,6 +299,7 @@
         }
 
         // 添加到待做清单
+        // 添加到待做清单
 function addToOrder(itemConditions) {
     if (itemConditions === '请选择选项') {
         alert('请选择选项');
@@ -316,8 +307,12 @@ function addToOrder(itemConditions) {
     }
 
     const orderItem = document.createElement('li');
+    const orderId = Date.now(); // 为每个订单生成唯一的ID
     orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
     orderList.appendChild(orderItem);
+
+    // 保存所选的餐品到本地存储
+    saveOrderToLocalStorage(selectedMenuItem, itemConditions, orderId);
 
     // 清空选项
     optionsPopup.style.display = 'none';
@@ -325,6 +320,57 @@ function addToOrder(itemConditions) {
     // 显示成功消息，传递所选的餐品名称
     showMessage(`${selectedMenuItem} 已點餐完成`);
 }
+
+// 完成订单
+function complete(button) {
+    const orderItem = button.parentElement;
+    orderList.removeChild(orderItem);
+
+    // 从本地存储中删除对应的餐点
+    const orderId = button.parentElement.getAttribute('data-order-id');
+    removeOrderFromLocalStorage(orderId);
+}
+
+function removeOrderFromLocalStorage(orderId) {
+    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+
+    // 找到并删除具有匹配 orderId 的订单
+    const updatedOrders = savedOrders.filter(order => order.orderId !== orderId);
+
+    // 更新本地存储
+    localStorage.setItem('orders', JSON.stringify(updatedOrders));
+}
+function saveOrderToLocalStorage(menuItem, itemConditions) {
+    // 从本地存储中获取之前保存的餐点
+    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+
+    // 添加当前的餐点到数组中
+    savedOrders.push({ menuItem, itemConditions });
+
+    // 将更新后的餐点重新保存到本地存储
+    localStorage.setItem('orders', JSON.stringify(savedOrders));
+}
+
+// 在页面加载时检查本地存储并恢复之前保存的餐点
+function restoreOrdersFromLocalStorage() {
+    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+
+    savedOrders.forEach(order => {
+        // 使用订单的唯一 ID 进行标识
+        const orderId = Date.now();
+        
+        const orderItem = document.createElement('li');
+        orderItem.innerHTML = `${order.menuItem} - ${order.itemConditions} <button class="complete-button" data-order-id="${orderId}" onclick="complete(${orderId})">完成</button>`;
+        
+        // 检查是否已经存在相同订单，如果不存在才添加
+        if (!orderList.querySelector(`[data-order-id="${orderId}"]`)) {
+            orderList.appendChild(orderItem);
+        }
+    });
+}
+
+// 调用函数以在页面加载时恢复餐点
+restoreOrdersFromLocalStorage();
 
 function showMessage(message) {
     const messageDiv = document.getElementById('messageDiv');
@@ -371,4 +417,3 @@ function showMessage(message) {
 
 </body>
 </html>
-
