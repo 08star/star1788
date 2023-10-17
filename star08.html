@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食材數量紀錄</title>
+</head>
+<body>
+    <h1>食材數量紀錄</h1>
+    <button id="addButton">添加</button>
+    <ul id="conversationList">
+        <!-- 这里将显示食材列表 -->
+    </ul>
+
+    <div id="addDialog" style="display: none;">
+        <h2>添加今日開啟物</h2>
+        <input type="text" id="conversationInput" placeholder="输入食材">
+        <button id="saveButton">保存</button>
+        <button id="cancelButton">取消</button>
+    </div>
+
+    <!-- 新的按钮，回到记餐系统 -->
+    <button id="goToMealSystem">回到記餐系统</button>
+
+    <script>
+        const addButton = document.getElementById('addButton');
+        const addDialog = document.getElementById('addDialog');
+        const conversationInput = document.getElementById('conversationInput');
+        const saveButton = document.getElementById('saveButton');
+        const cancelButton = document.getElementById('cancelButton');
+        const conversationList = document.getElementById('conversationList');
+
+        // 获取保存在本地存储中的食材列表
+        const savedConversation = JSON.parse(localStorage.getItem('conversation')) || [];
+
+        // 将保存的食材显示在列表中
+        function refreshConversationList() {
+            conversationList.innerHTML = ''; // 清空列表
+
+            savedConversation.forEach((text, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = text;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '删除';
+                deleteButton.addEventListener('click', () => {
+                    // 删除食材项
+                    savedConversation.splice(index, 1);
+                    localStorage.setItem('conversation', JSON.stringify(savedConversation));
+                    refreshConversationList();
+                });
+                listItem.appendChild(deleteButton);
+                conversationList.appendChild(listItem);
+            });
+        }
+
+        addButton.addEventListener('click', () => {
+            addDialog.style.display = 'block';
+        });
+
+        cancelButton.addEventListener('click', () => {
+    addDialog.style.display = 'none';
+    conversationInput.value = '';
+});
+
+
+        saveButton.addEventListener('click', () => {
+            const text = conversationInput.value;
+            if (text) {
+                savedConversation.push(text);
+                localStorage.setItem('conversation', JSON.stringify(savedConversation));
+                refreshConversationList(); // 刷新列表
+                addDialog.style.display = 'none';
+                conversationInput.value = '';
+            }
+        });
+
+        // 初始化页面时刷新食材列表
+        refreshConversationList();
+    </script>
+
+    <script>
+        // 获取回到记餐系统按钮元素
+        const goToMealSystemButton = document.getElementById('goToMealSystem');
+
+        // 监听回到记餐系统按钮的点击事件
+        goToMealSystemButton.addEventListener('click', function () {
+            // 在按钮点击时，将用户重定向到记餐系统页面 (假设记餐系统页面为index1.html)
+            window.location.href = 'index1.html';
+        });
+    </script>
+</body>
+</html>
