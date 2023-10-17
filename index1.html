@@ -202,6 +202,7 @@
     </div>
     <div class="category" id="麵類">
         <div class="menu-item" onclick="showOptions('炒麵')">炒麵</div>
+        <div class="menu-item" onclick="showOptions('鐵版麵')">鐵版麵</div>
     <div class="menu-item" onclick="showOptions('烤肉炒麵')">烤肉炒麵</div>
     <div class="menu-item" onclick="showOptions('日雞炒麵')">日雞炒麵</div>
     <div class="menu-item" onclick="showOptions('日豬炒麵')">日豬炒麵</div>
@@ -264,9 +265,13 @@
     <div class="modal" id="optionsPopup">
         <h2>選擇選項</h2>
         <button onclick="addToOrder('正常')" style="width: 80px;height: 36;height: 31px;font-size: 20px;">正常</button>
-        <button onclick="addToOrder('全')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">全</button>
+        <button onclick="addToOrder('全P')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">全P</button>
         <button onclick="addToOrder('特殊')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">特殊</button>
         <button onclick="addToOrder('不醬')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">不醬</button>
+        <button onclick="addToOrder('不菜')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">不菜</button>
+        <button onclick="addToOrder('+起司')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">+起司</button>
+        <button onclick="addToOrder('+鮪魚')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">+鮪魚</button>
+        <button onclick="addToOrder('+火腿')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">+火腿</button>
         <button onclick="addToOrder('番改千')" style="width: 80px;height: 36;height: 31px;font-size: 20px;">番改千</button>
         <!-- 在这里添加更多选项按钮 -->
         <button onclick="closeOptions()" style="width: 100px;height: 36;height: 31px;font-size: 20px;">關閉視窗</button>
