@@ -113,7 +113,7 @@
         /* 导航栏样式 */
         .navbar {
             display: flex;
-    justify-content: center; /* 水平居中 */
+            justify-content: center; /* 水平居中 */
     background: #000000;
     color: #ffffff;
     font-size: 20px;
@@ -132,22 +132,22 @@
         /* 模态框样式 */
         .modal {
             position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: none;
-    background: #e635e6;
-    background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
-    background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
-    background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
-    background-image: -o-linear-gradient(top, #e635e6, #2980b9);
-    background-image: linear-gradient(to bottom, #e635e6, #2980b9);
-    border-radius: 50px; /* 不要忘记单位，像这样：px */
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 20px;
-    padding: 10px 20px;
-    text-decoration: none;
+            background: #e635e6;
+            background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -o-linear-gradient(top, #e635e6, #2980b9);
+            background-image: linear-gradient(to bottom, #e635e6, #2980b9);
+            border-radius: 50px; /* 不要忘记单位，像这样：px */
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 10px;
+            text-decoration: none;
         }
         .floating-button {
             font-size: 15px; /* 调整字体大小为20px，根据需要修改 */
@@ -308,9 +308,10 @@ function resetCategoryColors() {
     </div>
     <div class="category" id="法國吐司">
         <div class="menu-item" onclick="showOptions('果醬法吐')">果醬法吐</div>
-    <div class="menu-item" onclick="showOptions('培根法吐')">培根法吐</div>
-    <div class="menu-item" onclick="showOptions('鮪魚法吐')">鮪魚法吐</div>
-    <div class="menu-item" onclick="showOptions('烤肉法吐')">烤肉法吐</div>
+        <div class="menu-item" onclick="showOptions('肉鬆法吐')">肉鬆法吐</div>
+        <div class="menu-item" onclick="showOptions('培根法吐')">培根法吐</div>
+        <div class="menu-item" onclick="showOptions('鮪魚法吐')">鮪魚法吐</div>
+        <div class="menu-item" onclick="showOptions('烤肉法吐')">烤肉法吐</div>
         
         <!-- 在这里添加更多吐司的菜单项 -->
     </div>
@@ -355,7 +356,7 @@ function resetCategoryColors() {
 
 
     <!-- 待做清单模态框 -->
-    <div class="modal" id="orderDetailsPopup" style="display: block;height: 400px;width: 300px;">
+    <div class="modal" id="orderDetailsPopup">
         <h2>待做清單</h2>
         <ul id="orderDetails" class="order-item">
             
