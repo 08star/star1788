@@ -6,6 +6,20 @@
     <title>記餐系统</title>
     
     <style>
+        body {
+    background-image: url('background.jpg'); /* 设置背景图片的 URL */
+    background-size: cover; /* 让背景图片填满整个页面 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+    background-attachment: fixed; /* 可选：固定背景图片 */
+    background-position: center center; /* 将背景图片水平和垂直居中 */
+}
+        .my-div {
+    background-color: #EFEFEF; /* 设置背景颜色 */
+    background-image: url('div-background.jpg'); /* 设置背景图片的 URL */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+    background-size: cover; /* 让背景图片充满整个元素 */
+    background-position: center; /* 将背景图片居中 */
+}
         .btn {
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
@@ -159,6 +173,7 @@ transform: translate(-50%, -50%);
 }
     </style>
 </head>
+<div class="my-div"></div>
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
