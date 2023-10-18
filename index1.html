@@ -6,18 +6,60 @@
     <title>記餐系统</title>
     
     <style>
+        .btn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 12px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #000000;
+  padding: 5px 15px 5px 15px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+        .enjoy-css {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #018dc4;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font: normal normal bold 16px/normal "Times New Roman", Times, serif;
+  color: rgba(255,255,255,0.9);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(194,123,160,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+        .order-item {
+        font-size: 30px;
+    }
         /* ... 你的 CSS 样式 ... */
     
         .floating-button {
             position: fixed;
-            top: 290px;
-            right: 20px;
-            background-color: #f00;
-            color: #fff;
-            padding: 25px;
-            border: none;
-            cursor: pointer;
-            border-radius: 80%;
+    top: 290px;
+    right: 20px;
+    background-color: #f00;
+    color: #fff;
+    width: 90px; /* 设置按钮的宽度 */
+    height: 50px; /* 设置按钮的高度 */
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* 设置适度的圆角半径，根据需要进行调整 */
         }
 
         .category {
@@ -27,47 +69,71 @@
         }
 
         .menu-item {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #333;
-            background-color: #f5f5f5;
-            cursor: pointer;
+            background: #e635e6;
+  background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
+  background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
+  background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
+  background-image: -o-linear-gradient(top, #e635e6, #2980b9);
+  background-image: linear-gradient(to bottom, #e635e6, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 1px 1px 3px #fafafa;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
         }
 
         .menu-item:hover {
-            background-color: #ddd;
+            background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
         }
 
         /* 导航栏样式 */
         .navbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
+            -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  text-shadow: 1px 1px 3px #fafafa;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #000000;
+  padding: 9px 10px 9px 10px;
+  text-decoration: none;
         }
+        
 
         .navbar a {
-            color: #fff;
             text-decoration: none;
-            padding: 5px 10px;
         }
 
         /* 模态框样式 */
         .modal {
-            display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #ece06c;
-            padding: 10px;
-            box-shadow: 0px 50px 10px rgba(0, 0, 10, 0.5);
-            z-index: 1000;
-            overflow: hidden;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+            display: none;
+    background: #e635e6;
+    background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
+    background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
+    background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
+    background-image: -o-linear-gradient(top, #e635e6, #2980b9);
+    background-image: linear-gradient(to bottom, #e635e6, #2980b9);
+    border-radius: 50px; /* 不要忘记单位，像这样：px */
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px;
+    text-decoration: none;
         }
         .floating-button {
             font-size: 15px; /* 调整字体大小为20px，根据需要修改 */
@@ -114,10 +180,10 @@
 <body>
     <h1>記餐系统</h1>
     <!-- 在index1.html中的合适位置添加登出按钮 -->
-    <button id="logout-button">登出</button>
+    <button id="logout-button" class="enjoy-css">登出</button>
 
     <!-- 添加按钮用于添加管理员 -->
-    <button id="star08">食材數量紀錄</button>
+    <button id="star08" class="enjoy-css">食材數量紀錄</button>
 
     <!-- JavaScript 代码 -->
     <script>
@@ -142,18 +208,37 @@
 
     <!-- 导航栏 -->
     <div class="navbar">
-        <a href="#" onclick="showCategory('吐司')">吐司</a>
-        <a href="#" onclick="showCategory('漢堡')">漢堡</a>
-        <a href="#" onclick="showCategory('蛋餅')">蛋餅</a>
-        <a href="#" onclick="showCategory('麵類')">麵類</a>
-        <a href="#" onclick="showCategory('捲餅')">捲餅</a>
-        <a href="#" onclick="showCategory('炸物')">炸物</a>
-        <a href="#" onclick="showCategory('法國吐司')">法吐</a>
-        <a href="#" onclick="showCategory('日式穀堡')">穀堡</a>
-        <a href="#" onclick="showCategory('起酥堡')">起酥</a>
+        <a href="#" onclick="showCategory('吐司')" id="category-toast">吐司</a>
+    <a href="#" onclick="showCategory('漢堡')" id="category-burger">漢堡</a>
+    <a href="#" onclick="showCategory('蛋餅')" id="category-omelette">蛋餅</a>
+    <a href="#" onclick="showCategory('麵類')" id="category-noodles">麵類</a>
+    <a href="#" onclick="showCategory('捲餅')" id="category-pancake">捲餅</a>
+    <a href="#" onclick="showCategory('炸物')" id="category-fried">炸物</a>
+    <a href="#" onclick="showCategory('法國吐司')" id="category-french-toast">法吐</a>
+    <a href="#" onclick="showCategory('日式穀堡')" id="category-rice-burger">穀堡</a>
+    <a href="#" onclick="showCategory('起酥堡')" id="category-croissant-burger">起酥</a>
         <!-- 在这里添加更多分类的链接 -->
-    </div>
+    
+    <script>
+        // 获取所有导航项目元素
+    const categories = document.querySelectorAll('.navbar a');
 
+// 添加事件监听器来管理颜色变化
+categories.forEach(category => {
+    category.addEventListener('click', function () {
+        resetCategoryColors();
+        category.style.color = 'red'; // 设置所需的颜色
+    });
+});
+
+// 重置所有项目的颜色为默认颜色
+function resetCategoryColors() {
+    categories.forEach(category => {
+        category.style.color = '#fff'; // 默认颜色
+    });
+}
+    </script>
+    </div>
     <!-- 吐司分类 -->
     <div class="category" id="吐司">
         <div class="menu-item" onclick="showOptions('假吐')">假吐</div>
@@ -264,17 +349,17 @@
     <!-- 显示选项的模态框 -->
     <div class="modal" id="optionsPopup">
         <h2>選擇選項</h2>
-        <button onclick="addToOrder('正常')" style="width: 80px;height: 36;height: 31px;font-size: 20px;">正常</button>
-        <button onclick="addToOrder('全P')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">全P</button>
-        <button onclick="addToOrder('特殊')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">特殊</button>
-        <button onclick="addToOrder('不醬')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">不醬</button>
-        <button onclick="addToOrder('不菜')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">不菜</button>
-        <button onclick="addToOrder('+起司')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">+起司</button>
-        <button onclick="addToOrder('+鮪魚')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">+鮪魚</button>
-        <button onclick="addToOrder('+火腿')" style="width: 60px;height: 36;height: 31px;font-size: 20px;">+火腿</button>
-        <button onclick="addToOrder('番改千')" style="width: 80px;height: 36;height: 31px;font-size: 20px;">番改千</button>
+        <button onclick="addToOrder('正常')" style="width: 90px;" class="btn">正常</button>
+        <button onclick="addToOrder('全P')" style="width: 76px;" class="btn">全P</button>
+        <button onclick="addToOrder('特殊')" style="width: 76px;" class="btn">特殊</button>
+        <button onclick="addToOrder('不醬')" style="width: 76px;" class="btn">不醬</button>
+        <button onclick="addToOrder('不菜')" style="width: 76px;" class="btn">不菜</button>
+        <button onclick="addToOrder('+起司')" style="width: 90px;" class="btn">+起司</button>
+        <button onclick="addToOrder('+鮪魚')" style="width: 90px;" class="btn">+鮪魚</button>
+        <button onclick="addToOrder('+火腿')" style="width: 90px;" class="btn">+火腿</button>
+        <button onclick="addToOrder('番改千')" style="width: 110px;" class="btn">番改千</button>
         <!-- 在这里添加更多选项按钮 -->
-        <button onclick="closeOptions()" style="width: 100px;height: 36;height: 31px;font-size: 20px;">關閉視窗</button>
+        <button onclick="closeOptions()" style="width: 90px; height: 60px" class="menu-item">關閉</button>
     </div>
 
     <!-- 右上角的浮动按钮 -->
@@ -282,12 +367,13 @@
 
 
     <!-- 待做清单模态框 -->
-    <div class="modal" id="orderDetailsPopup" style="display: block;height: 400px;width: 400px;">
+    <div class="modal" id="orderDetailsPopup" style="display: block;height: 400px;width: 300px;">
         <h2>待做清單</h2>
-        <ul id="orderDetails">
+        <ul id="orderDetails" class="order-item">
+            
             <!-- 这里将显示最终的订单详情 -->
         </ul>
-        <button onclick="closeOrderDetails()">關閉</button>
+        <button onclick="closeOrderDetails()" class="menu-item">關閉</button>
     </div>
     <div id="messageDiv" style = "padding-bottom: 300px;"></div>
 
