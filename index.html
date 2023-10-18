@@ -5,6 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>記餐系統登入</title>
     <style>
+        body {
+    background-image: url('background.jpg'); /* 设置背景图片的 URL */
+    background-size: cover; /* 让背景图片填满整个页面 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+    background-attachment: fixed; /* 可选：固定背景图片 */
+    background-position: center center; /* 将背景图片水平和垂直居中 */
+    }
+        .my-div {
+    background-color: #EFEFEF; /* 设置背景颜色 */
+    background-image: url('div-background.jpg'); /* 设置背景图片的 URL */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
+    background-size: cover; /* 让背景图片充满整个元素 */
+    background-position: center; /* 将背景图片居中 */
+    }
+        .btn {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 12px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    background: #000000;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+    }
+        .menu-item {
+            background: #e635e6;
+            background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -o-linear-gradient(top, #e635e6, #2980b9);
+            background-image: linear-gradient(to bottom, #e635e6, #2980b9);
+            -webkit-border-radius: 28;
+            -moz-border-radius: 28;
+            border-radius: 28px;
+            text-shadow: 1px 1px 3px #fafafa;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+    }
+
+    .menu-item:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+    }
+    .enjoy {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 10px 20px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font: normal normal bold 16px/normal "Times New Roman", Times, serif;
+  color: rgba(0,142,198,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(252,252,252,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+.enjoy-css {
+  border-left-width: 30px;
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+  padding: 3px 20px;
+  border: 1px solid #018dc4;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font: normal normal bold 16px/normal "Times New Roman", Times, serif;
+  color: rgba(255,255,255,0.9);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(194,123,160,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+</style>
+    <style>
         /* 样式可以根据你的需求进行自定义 */
         body {
             font-family: Arial, sans-serif;
@@ -47,14 +147,14 @@
         <h2>登入</h2>
         <form id="login-form">
             <div class="form-group">
-                <label for="username">用户名：</label>
+                <label for="username">帳號：</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">密碼：</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" class="login-button">登录</button>
+            <button type="submit" class="menu-item">登入</button>
         </form>
     </div>
 
@@ -70,7 +170,7 @@
             // 你可以使用 Fetch API 或其他方式发送 POST 请求
 
             // 假设验证成功后，将用户重定向到 index1.html
-            if (username === 'root' && password === 'aaaaaaaa') {
+            if (username === 'root' && password === '0509') {
                 window.location.href = 'index1.html';
             } else {
                 // 登录失败的处理
