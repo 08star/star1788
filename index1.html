@@ -193,35 +193,8 @@ transform: translate(-50%, -50%);
 </script>
 
 <body>
-    <h1>記餐系统</h1>
-    <!-- 在index1.html中的合适位置添加登出按钮 -->
-    <button id="logout-button" class="enjoy-css">登出</button>
+    <h1 class="" style="margin-bottom: 10px;margin-top: 10px;">餐點系统</h1>
 
-    <!-- 添加按钮用于添加管理员 -->
-    <button id="star08" class="enjoy-css">食材數量紀錄</button>
-
-    <!-- JavaScript 代码 -->
-    <script>
-        // 获取登出按钮元素
-        const logoutButton = document.getElementById('logout-button');
-        const star08Button = document.getElementById('star08');
-
-        // 监听登出按钮的点击事件
-        logoutButton.addEventListener('click', function () {
-            // 在这里执行登出操作，例如清除用户会话或重置登录状态
-
-            // 完成登出操作后，将用户重定向到 index.html
-            window.location.href = 'index.html';
-        });
-
-        // 监听今日開項目紀錄按钮的点击事件
-        star08Button.addEventListener('click', function () {
-            // 在按钮点击时，将用户重定向到 star08.html 页面
-            window.location.href = 'star08.html';
-        });
-    </script>
-
-    <!-- 导航栏 -->
     <div class="navbar">
         <a href="#" onclick="showCategory('吐司')" id="category-toast">吐司</a>
     <a href="#" onclick="showCategory('漢堡')" id="category-burger">漢堡</a>
@@ -254,6 +227,7 @@ function resetCategoryColors() {
 }
     </script>
     </div>
+    
     <!-- 吐司分类 -->
     <div class="category" id="吐司">
         <div class="menu-item" onclick="showOptions('假吐')">假吐</div>
@@ -359,12 +333,11 @@ function resetCategoryColors() {
         <!-- 在这里添加更多吐司的菜单项 -->
     </div>
 
-<!-- 在这里添加其他菜单分类的HTML代码 -->
-
     <!-- 显示选项的模态框 -->
     <div class="modal" id="optionsPopup">
         <h2>選擇選項</h2>
         <button onclick="addToOrder('正常')" style="width: 90px;" class="btn">正常</button>
+        <button onclick="addToOrder('X2')" style="width: 90px;" class="btn">X2</button>
         <button onclick="addToOrder('全P')" style="width: 76px;" class="btn">全P</button>
         <button onclick="addToOrder('特殊')" style="width: 76px;" class="btn">特殊</button>
         <button onclick="addToOrder('不醬')" style="width: 76px;" class="btn">不醬</button>
@@ -412,7 +385,7 @@ function addToOrder(itemConditions) {
     }
 
     const orderItem = document.createElement('li');
-    orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="complete-button" onclick="complete(this)">完成</button>`;
+    orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="enjoy-css" style="padding-top: 2px;height: 30px;" onclick="complete(this)">完成</button>`;
     orderList.appendChild(orderItem);
 
     // 清空选项
@@ -464,6 +437,32 @@ function showMessage(message) {
     optionsPopup.style.display = 'none';
 }
     </script>
+     <!-- 在index1.html中的合适位置添加登出按钮 -->
+     <button id="logout-button" class="enjoy-css">登出</button>
+
+     <!-- 添加按钮用于添加管理员 -->
+     <button id="star08" class="enjoy-css">食材數量紀錄</button>
+ 
+     <!-- JavaScript 代码 -->
+     <script>
+         // 获取登出按钮元素
+         const logoutButton = document.getElementById('logout-button');
+         const star08Button = document.getElementById('star08');
+ 
+         // 监听登出按钮的点击事件
+         logoutButton.addEventListener('click', function () {
+             // 在这里执行登出操作，例如清除用户会话或重置登录状态
+ 
+             // 完成登出操作后，将用户重定向到 index.html
+             window.location.href = 'index.html';
+         });
+ 
+         // 监听今日開項目紀錄按钮的点击事件
+         star08Button.addEventListener('click', function () {
+             // 在按钮点击时，将用户重定向到 star08.html 页面
+             window.location.href = 'star08.html';
+         });
+     </script>
 
 </body>
 </html>
