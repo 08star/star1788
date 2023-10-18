@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>食材數量紀錄</title>
+    <title>點點.餐點系统</title>
+    
     <style>
         body {
     background-image: url('background.jpg'); /* 设置背景图片的 URL */
@@ -11,76 +12,30 @@
     background-repeat: no-repeat; /* 禁止背景图片重复 */
     background-attachment: fixed; /* 可选：固定背景图片 */
     background-position: center center; /* 将背景图片水平和垂直居中 */
-    }
+}
         .my-div {
     background-color: #EFEFEF; /* 设置背景颜色 */
     background-image: url('div-background.jpg'); /* 设置背景图片的 URL */
     background-repeat: no-repeat; /* 禁止背景图片重复 */
     background-size: cover; /* 让背景图片充满整个元素 */
     background-position: center; /* 将背景图片居中 */
-    }
-        .btn {
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
-    border-radius: 12px;
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 20px;
-    background: #000000;
-    padding: 5px 15px 5px 15px;
-    text-decoration: none;
-    }
-        .menu-item {
-            background: #e635e6;
-            background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
-            background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
-            background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
-            background-image: -o-linear-gradient(top, #e635e6, #2980b9);
-            background-image: linear-gradient(to bottom, #e635e6, #2980b9);
-            -webkit-border-radius: 28;
-            -moz-border-radius: 28;
-            border-radius: 28px;
-            text-shadow: 1px 1px 3px #fafafa;
-            font-family: Arial;
-            color: #ffffff;
-            font-size: 20px;
-            padding: 10px 20px 10px 20px;
-            text-decoration: none;
-    }
-
-    .menu-item:hover {
-        background: #3cb0fd;
-        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-        text-decoration: none;
-    }
-    .enjoy {
-  display: inline-block;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  padding: 10px 20px;
-  border: 1px solid #b7b7b7;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  font: normal normal bold 16px/normal "Times New Roman", Times, serif;
-  color: rgba(0,142,198,1);
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  background: rgba(252,252,252,1);
-  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
-  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
-  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
-.enjoy-css {
-  border-left-width: 30px;
+        .btn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 12px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #000000;
+  padding: 5px 15px 5px 15px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+        .enjoy-css {
   display: inline-block;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -103,91 +58,410 @@
   -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
   transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
 }
-</style>
-<body>
-    <h1>食材數量紀錄</h1>
-    <button id="addButton" class="menu-item">添加</button>
-    <ul id="conversationList">
-        <!-- 这里将显示食材列表 -->
-    </ul>
-
-    <div id="addDialog" style="display: none;"  class="menu-item">
-        <h2>添加今日開啟物</h2>
-        <input type="text" id="conversationInput" placeholder="輸入食材" class="enjoy">
-        <button id="saveButton"  class="menu-item">保存</button>
-        <button id="cancelButton"  class="menu-item">取消</button>
-    </div>
-
-    <!-- 新的按钮，回到记餐系统 -->
-    <button id="goToMealSystem"  class="menu-item">回到記餐系统</button>
-
-    <script>
-        const addButton = document.getElementById('addButton');
-        const addDialog = document.getElementById('addDialog');
-        const conversationInput = document.getElementById('conversationInput');
-        const saveButton = document.getElementById('saveButton');
-        const cancelButton = document.getElementById('cancelButton');
-        const conversationList = document.getElementById('conversationList');
-
-        // 获取保存在本地存储中的食材列表
-        const savedConversation = JSON.parse(localStorage.getItem('conversation')) || [];
-
-        // 将保存的食材显示在列表中
-        function refreshConversationList() {
-            conversationList.innerHTML = ''; // 清空列表
-
-            savedConversation.forEach((text, index) => {
-                const listItem = document.createElement('li');
-                listItem.className = 'menu-item'; // 添加 class
-                listItem.textContent = text;
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'enjoy-css'; // 添加 class
-                deleteButton.textContent = '删除';
-                deleteButton.addEventListener('click', () => {
-                    // 删除食材项
-                    savedConversation.splice(index, 1);
-                    localStorage.setItem('conversation', JSON.stringify(savedConversation));
-                    refreshConversationList();
-                });
-                listItem.appendChild(deleteButton);
-                conversationList.appendChild(listItem);
-            });
+        .order-item {
+        font-size: 30px;
+    }
+        /* ... 你的 CSS 样式 ... */
+    
+        .floating-button {
+            position: fixed;
+    top: 290px;
+    right: 20px;
+    background-color: #f00;
+    color: #fff;
+    width: 90px; /* 设置按钮的宽度 */
+    height: 50px; /* 设置按钮的高度 */
+    border: none;
+    cursor: pointer;
+    border-radius: 20px; /* 设置适度的圆角半径，根据需要进行调整 */
         }
 
-        addButton.addEventListener('click', () => {
-            addDialog.style.display = 'block';
-        });
+        .category {
+            margin: 30px;
+            display: none; /* 初始隐藏所有分类 */
+            flex-wrap: wrap;
+        }
 
-        cancelButton.addEventListener('click', () => {
-    addDialog.style.display = 'none';
-    conversationInput.value = '';
+        .menu-item {
+            background: #e635e6;
+  background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
+  background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
+  background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
+  background-image: -o-linear-gradient(top, #e635e6, #2980b9);
+  background-image: linear-gradient(to bottom, #e635e6, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 1px 1px 3px #fafafa;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+        }
+
+        .menu-item:hover {
+            background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+    background: #000000;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 9px 10px 9px 10px;
+        }
+        
+
+        .navbar a {
+            text-align: center; /* 文本居中 */
+    flex: 1; /* 平均占据可用宽度，使项目水平居中 */
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0 10px; /* 可根据需要添加内边距 */
+        }
+
+        /* 模态框样式 */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            background: #e635e6;
+            background-image: -webkit-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -moz-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -ms-linear-gradient(top, #e635e6, #2980b9);
+            background-image: -o-linear-gradient(top, #e635e6, #2980b9);
+            background-image: linear-gradient(to bottom, #e635e6, #2980b9);
+            border-radius: 50px; /* 不要忘记单位，像这样：px */
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 20px;
+            padding: 10px 10px;
+            text-decoration: none;
+        }
+        .floating-button {
+            font-size: 15px; /* 调整字体大小为20px，根据需要修改 */
+    /* 其他样式 */
+
+        }
+        
+        /* 将选项按钮放成两列 */
+#optionsPopup button {
+    width: 60px;
+    height: 36px;
+    font-size: 20px;
+    margin: 5px; /* 添加间距 */
+    float: left; /* 左浮动，使其并排显示 */
+}
+
+/* 清除浮动以避免影响其他元素 */
+#optionsPopup::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+    </style>
+</head>
+<div class="my-div"></div>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    // 连接到WebSocket服务器
+    const socket = io();
+
+    // 监听服务器发送的更新消息
+    socket.on('update', (data) => {
+        // 在这里更新待做清单，例如在页面上显示点餐信息
+        console.log('Received update:', data);
+    });
+
+    // 当用户点餐时，发送消息到服务器
+    document.getElementById('order-button').addEventListener('click', () => {
+        const orderData = { /* 这里放置点餐信息 */ };
+        socket.emit('order', orderData);
+    });
+</script>
+
+<body>
+    <h1 class="" style="margin-bottom: 10px;margin-top: 10px;">餐點系统</h1>
+
+    <div class="navbar">
+        <a href="#" onclick="showCategory('吐司')" id="category-toast">吐司</a>
+    <a href="#" onclick="showCategory('漢堡')" id="category-burger">漢堡</a>
+    <a href="#" onclick="showCategory('蛋餅')" id="category-omelette">蛋餅</a>
+    <a href="#" onclick="showCategory('麵類')" id="category-noodles">麵類</a>
+    <a href="#" onclick="showCategory('捲餅')" id="category-pancake">捲餅</a>
+    <a href="#" onclick="showCategory('炸物')" id="category-fried">炸物</a>
+    <a href="#" onclick="showCategory('法國吐司')" id="category-french-toast">法吐</a>
+    <a href="#" onclick="showCategory('日式穀堡')" id="category-rice-burger">穀堡</a>
+    <a href="#" onclick="showCategory('起酥堡')" id="category-croissant-burger">起酥</a>
+        <!-- 在这里添加更多分类的链接 -->
+    
+    <script>
+        // 获取所有导航项目元素
+    const categories = document.querySelectorAll('.navbar a');
+
+// 添加事件监听器来管理颜色变化
+categories.forEach(category => {
+    category.addEventListener('click', function () {
+        resetCategoryColors();
+        category.style.color = 'red'; // 设置所需的颜色
+    });
 });
 
-
-        saveButton.addEventListener('click', () => {
-            const text = conversationInput.value;
-            if (text) {
-                savedConversation.push(text);
-                localStorage.setItem('conversation', JSON.stringify(savedConversation));
-                refreshConversationList(); // 刷新列表
-                addDialog.style.display = 'none';
-                conversationInput.value = '';
-            }
-        });
-
-        // 初始化页面时刷新食材列表
-        refreshConversationList();
+// 重置所有项目的颜色为默认颜色
+function resetCategoryColors() {
+    categories.forEach(category => {
+        category.style.color = '#fff'; // 默认颜色
+    });
+}
     </script>
+    </div>
+    
+    <!-- 吐司分类 -->
+    <div class="category" id="吐司">
+        <div class="menu-item" onclick="showOptions('假吐')">假吐</div>
+        <div class="menu-item" onclick="showOptions('烤吐')">烤吐</div>
+        <div class="menu-item" onclick="showOptions('起吐')">起吐</div>
+        <div class="menu-item" onclick="showOptions('鮪吐')">鮪吐</div>
+        <div class="menu-item" onclick="showOptions('火吐')">火吐</div>
+        <div class="menu-item" onclick="showOptions('培吐')">培吐</div>
+        <div class="menu-item" onclick="showOptions('培吐')">培吐</div>
+        <div class="menu-item" onclick="showOptions('香雞吐')">香雞吐</div>
+        <div class="menu-item" onclick="showOptions('總吐')">總吐</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="漢堡">
+        <div class="menu-item" onclick="showOptions('總堡')">總堡</div>
+    <div class="menu-item" onclick="showOptions('烤堡')">烤堡</div>
+    <div class="menu-item" onclick="showOptions('牛堡')">牛堡</div>
+    <div class="menu-item" onclick="showOptions('豬堡')">豬堡</div>
+    <div class="menu-item" onclick="showOptions('玉堡')">玉堡</div>
+    <div class="menu-item" onclick="showOptions('辣腿堡')">辣腿堡</div>
+    <div class="menu-item" onclick="showOptions('原腿堡')">原腿堡</div>
+    <div class="menu-item" onclick="showOptions('香雞堡')">香雞堡</div>
+    <div class="menu-item" onclick="showOptions('日雞堡')">日雞</div>
+    <div class="menu-item" onclick="showOptions('日豬堡')">日豬堡</div>
+    <div class="menu-item" onclick="showOptions('花枝堡')">花枝堡</div>
+    <div class="menu-item" onclick="showOptions('蝦排堡')">蝦排堡</div>
+    <div class="menu-item" onclick="showOptions('肉鬆堡')">肉鬆堡</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="蛋餅">
+        <div class="menu-item" onclick="showOptions('原味')">原味</div>
+    <div class="menu-item" onclick="showOptions('烤肉')">烤肉</div>
+    <div class="menu-item" onclick="showOptions('起司')">起司</div>
+    <div class="menu-item" onclick="showOptions('火腿')">火腿</div>
+    <div class="menu-item" onclick="showOptions('鮪魚')">鮪魚</div>
+    <div class="menu-item" onclick="showOptions('培根')">培根</div>
+    <div class="menu-item" onclick="showOptions('熱狗')">熱狗</div>
+    <div class="menu-item" onclick="showOptions('玉米')">玉米</div>
+    <div class="menu-item" onclick="showOptions('萵苣')">萵苣</div>
+    <div class="menu-item" onclick="showOptions('洋蔥')">洋蔥</div>
+    <div class="menu-item" onclick="showOptions('肉鬆')">肉鬆</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="麵類">
+        <div class="menu-item" onclick="showOptions('炒麵')">炒麵</div>
+        <div class="menu-item" onclick="showOptions('鐵版麵')">鐵版麵</div>
+    <div class="menu-item" onclick="showOptions('烤肉炒麵')">烤肉炒麵</div>
+    <div class="menu-item" onclick="showOptions('日雞炒麵')">日雞炒麵</div>
+    <div class="menu-item" onclick="showOptions('日豬炒麵')">日豬炒麵</div>
+    <div class="menu-item" onclick="showOptions('培根炒麵')">培根炒麵</div>
+    <div class="menu-item" onclick="showOptions('火腿炒麵')">火腿炒麵</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="捲餅">
+        <div class="menu-item" onclick="showOptions('香雞捲')">香雞捲</div>
+    <div class="menu-item" onclick="showOptions('烤肉捲')">烤肉捲</div>
+    <div class="menu-item" onclick="showOptions('日雞捲')">日雞捲</div>
+    <div class="menu-item" onclick="showOptions('花枝捲')">花枝捲</div>
+    <div class="menu-item" onclick="showOptions('蝦排捲')">蝦排捲</div>
+    <div class="menu-item" onclick="showOptions('原腿捲')">原腿捲</div>
+    <div class="menu-item" onclick="showOptions('辣腿捲')">辣腿捲</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="炸物">
+        <div class="menu-item" onclick="showOptions('全熟蛋')">全熟蛋</div>
+    <div class="menu-item" onclick="showOptions('半熟蛋')">半熟蛋</div>
+    <div class="menu-item" onclick="showOptions('熱狗')">熱狗</div>
+    <div class="menu-item" onclick="showOptions('薯餅')">薯餅</div>
+    <div class="menu-item" onclick="showOptions('蘿蔔糕')">蘿蔔糕</div>
+    <div class="menu-item" onclick="showOptions('鐵板麵')">鐵板麵</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="法國吐司">
+        <div class="menu-item" onclick="showOptions('果醬法吐')">果醬法吐</div>
+        <div class="menu-item" onclick="showOptions('肉鬆法吐')">肉鬆法吐</div>
+        <div class="menu-item" onclick="showOptions('培根法吐')">培根法吐</div>
+        <div class="menu-item" onclick="showOptions('鮪魚法吐')">鮪魚法吐</div>
+        <div class="menu-item" onclick="showOptions('烤肉法吐')">烤肉法吐</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="日式穀堡">
+        <div class="menu-item" onclick="showOptions('菜穀')">菜穀</div>
+    <div class="menu-item" onclick="showOptions('雞穀')">雞穀</div>
+    <div class="menu-item" onclick="showOptions('豬穀')">豬穀</div>
+    <div class="menu-item" onclick="showOptions('咖哩穀')">咖哩穀</div>
+    <div class="menu-item" onclick="showOptions('魚排穀')">魚排穀</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+    <div class="category" id="起酥堡">
+        <div class="menu-item" onclick="showOptions('果醬法吐')">草莓起酥</div>
+    <div class="menu-item" onclick="showOptions('洋芋起酥')">洋芋起酥</div>
+    <div class="menu-item" onclick="showOptions('苜蓿芽玉米起酥')">苜蓿芽玉米起酥</div>
+    <div class="menu-item" onclick="showOptions('番茄萵苣起酥')">番茄萵苣起酥</div>
+    <div class="menu-item" onclick="showOptions('萵苣烤肉起酥')">萵苣烤肉起酥</div>
+        
+        <!-- 在这里添加更多吐司的菜单项 -->
+    </div>
+
+    <!-- 显示选项的模态框 -->
+    <div class="modal" id="optionsPopup">
+        <h2>選擇選項</h2>
+        <button onclick="addToOrder('正常')" style="width: 90px;" class="btn">正常</button>
+        <button onclick="addToOrder('X2')" style="width: 60px;" class="btn">X2</button>
+        <button onclick="addToOrder('全P')" style="width: 76px;" class="btn">全P</button>
+        <button onclick="addToOrder('特殊')" style="width: 76px;" class="btn">特殊</button>
+        <button onclick="addToOrder('不醬')" style="width: 76px;" class="btn">不醬</button>
+        <button onclick="addToOrder('不菜')" style="width: 76px;" class="btn">不菜</button>
+        <button onclick="addToOrder('+起司')" style="width: 90px;" class="btn">+起司</button>
+        <button onclick="addToOrder('+鮪魚')" style="width: 90px;" class="btn">+鮪魚</button>
+        <button onclick="addToOrder('+火腿')" style="width: 90px;" class="btn">+火腿</button>
+        <button onclick="addToOrder('番改千')" style="width: 110px;" class="btn">番改千</button>
+        <!-- 在这里添加更多选项按钮 -->
+        <button onclick="closeOptions()" style="width: 90px; height: 60px" class="menu-item">關閉</button>
+    </div>
+
+    <!-- 右上角的浮动按钮 -->
+    <button class="floating-button" onclick="toggleOrderList()" style="font-size: 19px;">待做清單</button>
+
+
+    <!-- 待做清单模态框 -->
+    <div class="modal" id="orderDetailsPopup">
+        <h2>待做清單</h2>
+        <ul id="orderDetails" class="order-item">
+            
+            <!-- 这里将显示最终的订单详情 -->
+        </ul>
+        <button onclick="closeOrderDetails()" class="menu-item">關閉</button>
+    </div>
 
     <script>
-        // 获取回到记餐系统按钮元素
-        const goToMealSystemButton = document.getElementById('goToMealSystem');
+        const optionsPopup = document.querySelector('#optionsPopup');
+        const orderDetailsPopup = document.querySelector('#orderDetailsPopup');
+        const orderList = document.querySelector('#orderDetails');
+        let selectedMenuItem = '';
 
-        // 监听回到记餐系统按钮的点击事件
-        goToMealSystemButton.addEventListener('click', function () {
-            // 在按钮点击时，将用户重定向到记餐系统页面 (假设记餐系统页面为index1.html)
-            window.location.href = 'index1.html';
-        });
+        // 显示选项模态框
+        function showOptions(itemName) {
+            selectedMenuItem = itemName;
+            optionsPopup.style.display = 'block';
+        }
+
+        // 添加到待做清单
+function addToOrder(itemConditions) {
+    if (itemConditions === '请选择选项') {
+        alert('请选择选项');
+        return;
+    }
+
+    const orderItem = document.createElement('li');
+    orderItem.innerHTML = `${selectedMenuItem} - ${itemConditions} <button class="enjoy-css" style="padding-top: 2px;height: 30px;" onclick="complete(this)">完成</button>`;
+    orderList.appendChild(orderItem);
+
+    // 清空选项
+    optionsPopup.style.display = 'none';
+
+    // 显示成功消息，传递所选的餐品名称
+    showMessage(`${selectedMenuItem} 已點餐完成`);
+}
+
+function showMessage(message) {
+    const messageDiv = document.getElementById('messageDiv');
+    messageDiv.textContent = message;
+
+    // 清空消息，你可以设置一个定时器来自动清除消息
+    setTimeout(() => {
+        messageDiv.textContent = '';
+    }, 3000); // 在3秒后清空消息
+}
+
+        // 完成订单
+        function complete(button) {
+            const orderItem = button.parentElement;
+            orderList.removeChild(orderItem);
+        }
+
+        // 切换待做清单的显示状态
+        function toggleOrderList() {
+            orderDetailsPopup.style.display = 'block';
+        }
+
+        // 关闭待做清单
+        function closeOrderDetails() {
+            orderDetailsPopup.style.display = 'none';
+        }
+
+        // 显示特定分类
+        function showCategory(categoryId) {
+            const categories = document.querySelectorAll('.category');
+            categories.forEach(category => {
+                if (category.id === categoryId) {
+                    category.style.display = 'flex';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        }
+        function closeOptions() {
+    const optionsPopup = document.querySelector('#optionsPopup');
+    optionsPopup.style.display = 'none';
+}
     </script>
+     <!-- 在index1.html中的合适位置添加登出按钮 -->
+     <button id="logout-button" class="enjoy-css">登出</button>
+
+     <!-- 添加按钮用于添加管理员 -->
+     <button id="star08" class="enjoy-css">食材數量紀錄</button>
+ 
+     <!-- JavaScript 代码 -->
+     <script>
+         // 获取登出按钮元素
+         const logoutButton = document.getElementById('logout-button');
+         const star08Button = document.getElementById('star08');
+ 
+         // 监听登出按钮的点击事件
+         logoutButton.addEventListener('click', function () {
+             // 在这里执行登出操作，例如清除用户会话或重置登录状态
+ 
+             // 完成登出操作后，将用户重定向到 index.html
+             window.location.href = 'index.html';
+         });
+ 
+         // 监听今日開項目紀錄按钮的点击事件
+         star08Button.addEventListener('click', function () {
+             // 在按钮点击时，将用户重定向到 star08.html 页面
+             window.location.href = 'star08.html';
+         });
+     </script>
 </body>
 </html>
